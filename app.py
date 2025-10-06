@@ -20,13 +20,16 @@ def folder_to_dict(path):
 # --- Streamlit UI ---
 st.title("Folder to JSON Generator 📁➡️📄")
 
-folder_path = st.text_input("Enter folder path to scan:")
+folder_input = st.text_input("Enter folder path to scan:")
 
 if st.button("Generate JSON"):
+    # Clean the input path
+    folder_path = folder_input.strip().replace("/", "\\")
+    
     if not folder_path:
         st.error("Please enter a folder path!")
     elif not os.path.exists(folder_path):
-        st.error("The path does not exist!")
+        st.error(f"The path does not exist! Checked: {folder_path}")
     else:
         st.info("Scanning folder... this may take a few seconds.")
 
